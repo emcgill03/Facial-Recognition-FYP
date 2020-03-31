@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os 
+# using a haarcascade to detect my face and greets me with a welcome message
+# prompts any new users that it doesnt recognise 
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/share/rpi-code/FacialRecognitionProject/trainer/trainer.yml')
@@ -21,8 +23,8 @@ cam.set(3, 960) # set video widht
 cam.set(4, 720) # set video height
 
 # Define min window size to be recognized as a face
-minW = .25*cam.get(3)
-minH = .25*cam.get(4)
+minW = .25*cam.get(3) 
+minH = .25*cam.get(4) 
 
 intro = False
 c = 10
@@ -59,14 +61,14 @@ while True:
             print(c)
             
             if intro is False:
-                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/hello_Eamon.mp3")
+                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/hello_Eamon.mp3") # Hello Eamon output
                 intro = True
                 c = 0
                 
             else:           
                 if c > 9:
                     if id_num == 1:
-                        os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/return_Eamon.mp3")
+                        os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/return_Eamon.mp3") 
                         c = 0
                 c += 1
         else:
@@ -74,7 +76,7 @@ while True:
             confidence = "  {0}%".format(round(100 - confidence))
             
             if d > 4:
-                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/unknown_Eamon.mp3")
+                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/unknown_Eamon.mp3") # If a face is detected that is not Eamon
                 d = 0            
             
             d += 1
