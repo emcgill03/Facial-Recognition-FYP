@@ -1,8 +1,7 @@
 # Fall detector webservice
 #
-# Kim Salmi, kim.salmi(at)iki(dot)fi
-# http://tunn.us/arduino/falldetector.php
-# License: GPLv3
+# Edited to send an email to my account
+#
 import requests
 import os
 
@@ -26,9 +25,10 @@ class Webservice(object):
             auth=("api", self.apiKey),
             files=[("attachment", (attachment, open(file_path, "rb").read()))],
             data={"from": "Mailgun Sandbox <postmaster@sandbox8136583a700c4d77b99a43e10c32f3db.mailgun.org>",
-                  "to": 'Eamon McGill <emcgill03@hotmail.com>',
+                  "to": 'Eamon McGill <emcgill03@hotmail.com>', 
                   "subject": subject,
-                  "text": self.mailbody})
+                  "text": self.mailbody}) 
+    # Email alert isnt working properly yet. Possibly to do with sandbox account
 
     def alarm(self, detectiontype, personid, attachment):
         #tempurl = self.url
