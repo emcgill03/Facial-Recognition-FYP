@@ -1,3 +1,7 @@
+# Script will listen for the command 'Weather'.
+# When detected it will ask the user what city they want the forecast for
+# If a face is recognised, a greeting message will play 
+
 import speech_recognition as sr
 import os
 import time
@@ -126,13 +130,13 @@ while True:
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
         # Check if confidence is less them 100 ==> "0" is perfect match 
-        if (confidence < 75):
+        if (confidence < 75): # Confidence level could be lowered if more training data and power was available
             id_num = id
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
             
             if intro is False:
-                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/hello_Eamon.mp3")
+                os.system("mplayer -ao alsa -noconsolecontrols /home/pi/share/hello_Eamon.mp3") #Greeting when it recognises my face
                 intro = True
                 c = 0
                 askWeather()
