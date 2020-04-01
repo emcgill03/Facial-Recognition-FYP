@@ -33,6 +33,7 @@ while True:
         minSize=(100, 20)
         )
         
+    # Detection of a persons upper body     
     upperBody = upperCascade.detectMultiScale(
         gray,
         scaleFactor= 1.1,
@@ -47,7 +48,7 @@ while True:
         id = "Upper Body"
         cv2.putText(img, str(id), (x+5,y-5), font, 1, (0, 255, 40), 2)
 
-        
+    # Detection of a persons full body 
     fullBody = bodyCascade.detectMultiScale(
         gray,
         scaleFactor= 1.5,
@@ -62,11 +63,14 @@ while True:
         id = "full Body"
         cv2.putText(img, str(id), (x,y), font, 1, (150, 255, 40), 2)
         
+    # Detection of a face    
     for (x,y,w,h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = img[y:y+h, x:x+w] 
  
+
+        # Detection of eyes within a face 
         eyes = eyeCascade.detectMultiScale(
             roi_gray,
             scaleFactor= 1.5,
@@ -77,7 +81,7 @@ while True:
         for (ex, ey, ew, eh) in eyes:
             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (50, 255, 50), 2)
 
-        
+        # Detection of a smile within a face 
         smile = smileCascade.detectMultiScale(
             roi_gray,
             scaleFactor= 1.2,
@@ -90,7 +94,7 @@ while True:
             id = "Smile"
             cv2.putText(img, "Smiling", (x+5,y-5), font, 1, (0, 255, 255), 2, cv2.LINE_AA )
         
-        
+        # Glasses detection (Not overly accurate)
         glasses = glassesCascade.detectMultiScale(
             roi_gray,
             scaleFactor= 1.5,
