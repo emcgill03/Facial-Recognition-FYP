@@ -5,6 +5,7 @@ Real Time Face Recogition
 Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition    
 
 Developed by Marcelo Rovai - MJRoBot.org @ 21Feb18  
+Modified by Eamon McGill for the detection of an object - in this case, a can of beans
 
 '''
 
@@ -14,7 +15,8 @@ import os
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/share/rpi-code/FacialRecognitionProject/trainer/trainer.yml')
-cascadePath = "/home/pi/share/rpi-code/FacialRecognitionProject/Object_Dataset/Beans dataset/classifier/beans_cascade.xml"
+# Bean cascade created with 'Cascade Trainer GUI' 
+cascadePath = "/home/pi/share/rpi-code/FacialRecognitionProject/Object_Dataset/Beans dataset/classifier/beans_cascade.xml" 
 beanCascade = cv2.CascadeClassifier(cascadePath);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -48,8 +50,8 @@ while True:
         # minSize = (int(minW), int(minH)),
         minSize = (200, 20)
        )
-
-    for(x,y,w,h) in beans:
+    
+    for(x,y,w,h) in beans:  
 
         cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
 
