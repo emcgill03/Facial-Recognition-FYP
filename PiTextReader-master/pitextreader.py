@@ -36,7 +36,7 @@ VOLUME  = 90    # Audio volume
 
 # OTHER SETTINGS
 SOUNDS  = "/home/pi/PiTextReader/sounds/" # Directory for sound effect(s)
-CAMERA  = "raspistill -cfx 128:128 --awb auto -rot 0 -t 500 -o /tmp/image.jpg"
+CAMERA  = "raspistill -cfx 128:128 --awb auto -rot 0 -t 5000 -o /tmp/image.jpg"
 
 # GPIO BUTTONS
 BTN1    = 24    # The button!
